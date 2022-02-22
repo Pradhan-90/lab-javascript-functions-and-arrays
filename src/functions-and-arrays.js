@@ -10,14 +10,17 @@ function maxOfTwoNumbers(a,b) {
 // Iteration #2: Find longest word
 const words = ['mystery', 'brother', 'aviator', 'crocodile', 'pearl', 'orchard', 'crackpot'];
 
-function findLongestWord(words) {
-  let longWord = "";
-  words.forEach(function(word) {
-    if(word.length > longWord.length) {
-      longWord = word;
-    }
-  });
-  return longWord;
+function findLongestWord (words) {
+  let longestWord = '';
+  for(let i=0; i < words.length; i++) {
+      if(longestWord.length < words[i].length) {
+          longestWord = words[i];  
+      }         
+  } 
+  if (longestWord.length === 0) {
+    return null;
+  }
+  return longestWord;
 }
 
 // Iteration #3: Calculate the sum
@@ -27,13 +30,34 @@ function sumNumbers(num) {
   let sum = 0;
     for (let i = 0; i < num.length; i++) {
         sum += num[i];
-    } return sum;
+    } 
+  return sum;
 }
 
 
 
 // Iteration #3.1 Bonus:
-function sum() {}
+function sum(arr) {
+  let total = 0;
+    for (let i = 0; i < arr.length; i++) {
+      if(typeof arr[i] ===  'number') {
+        total += arr[i];
+      }
+      else if (typeof arr[i] === 'string') {
+        total += arr[i].length;
+      } 
+      else if (arr[i] === true) {
+        total += 1;
+      }
+      else if (arr[i] === false) {
+        total += 0;
+      }
+      else {
+        return 'Error: unsupported datatype'
+      }
+    } 
+  return total;
+}
 
 
 
@@ -45,8 +69,14 @@ function averageNumbers(num) {
   let total = 0;
    for (let i=0; i<num.length; i++) {
     total += num[i]
-    } let avg = total/num.length;
-        return avg;
+    }
+    if(total > 0) {
+      let avg = total/num.length;
+      return avg;    
+    } 
+    else {
+      return null;
+    }
 }
 
 
@@ -54,11 +84,17 @@ function averageNumbers(num) {
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
 
 function averageWordLength(words) {
-  let wordLength = words.length;
-    let joinWords = words.join('');
-    let result = joinWords.length / words.length
-    return result;
- }
+  let total = 0;
+  for(let i=0; i<words.length; i++) {
+      total += words[i].length
+  } if(total > 0) {
+      let avg = total/words.length
+      return avg;
+  }
+  else {
+      return null;
+  }
+}
 
 // Bonus - Iteration #4.1
 function avg() {}
@@ -78,27 +114,31 @@ const wordsUnique = [
   'bring'
 ];
 
-function uniquifyArray(words) {
+function uniquifyArray (words) {
   let uniqueArr = [];
-  words.forEach(element => {
-    if(!uniqueArr.includes(element)) {
-      uniqueArr.push(element);
-    }
-  });
-  return uniqueArr;
+  for(let i=0; i<words.length; i++){
+      if(uniqueArr.indexOf(words[i]) === -1) {
+          uniqueArr.push(words[i]);
+      }
+  }
+  if(uniqueArr.length === 0) {
+    return null;
+  }
+  return uniqueArr
 }
 
 // Iteration #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
 
-function doesWordExist(word1, word2) {
-  for (let i = 0; i < word1.length; i++) {
-    if (word1[i] === word2) {
+function doesWordExist(arr, word) {
+  if (arr.length === 0) {
+    return null;
+  }
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === word) {
         return true;
-    } else {
-    return false;
-    }
- }
+    } 
+   }  return false;
 }
 
 
@@ -122,10 +162,13 @@ const wordsCount = [
 function howManyTimes(words, value) {
   let times = 0;
   for(i = 0; i < words.length; i++) {
-      if(words[i] === value) {times++}
+    if(words[i] === value) {
+      times++;
+    }
+  } 
+    return times;
 }
-     return times;
-}
+
 
 
 
@@ -153,7 +196,23 @@ const matrix = [
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
 
-function greatestProduct() {}
+function greatestProduct( matrix) {
+  let product = 0;
+  for(let i=0; i<matrix.length - 3; i++ ) {
+    let arr = matrix[i];
+    for(let j=0; j<arr.length - 3; j++) {
+      let newValue = arr[j] * arr[j+1] * arr[j+2] * arr[j+3];
+      if(newValue > product) {
+        product = newValue;
+      }
+      let newValue2 = matrix[i][j] * matrix[i+1][j] * matrix[i+2][j] * matrix[i+3][j];
+      if (newValue2 > product) {
+        product = newValue2;
+      }
+    }
+  }
+  return product
+}
 
 
 
